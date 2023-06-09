@@ -25,6 +25,8 @@ EasyBite is a beginner-friendly programming language designed to introduce kids 
     - [Math Library](#math-library)
     - [String Library](#string-library)
     - [Array Library](#array-library)
+    - [Dictionary Library](#dictionary-library)
+      - [EasyBite Dictionary Functions](#easybite-dictionary-functions)
     - [DateTime Library](#datetime-library)
     - [GUI Library](#gui-library)
       - [**Detailed Explanation**](#detailed-explanation)
@@ -32,9 +34,12 @@ EasyBite is a beginner-friendly programming language designed to introduce kids 
       - [checkbox(formName: string, \[controlName: string\], \[text: string\], \[isChecked: bool\], \[x: int\], \[y: int\])](#checkboxformname-string-controlname-string-text-string-ischecked-bool-x-int-y-int)
       - [combobox(formName: string, \[labelText: string\], \[top: int\], \[left: int\], \[width: int\], \[height: int\])](#comboboxformname-string-labeltext-string-top-int-left-int-width-int-height-int)
     - [createform(formName: string, width: int, height: int)](#createformformname-string-width-int-height-int)
+      - [`getbackcolor(formName: string, controlName: string)`](#getbackcolorformname-string-controlname-string)
       - [getdock(formName: string, controlName: string): string](#getdockformname-string-controlname-string-string)
       - [getchecked(formName: string, controlName: string)](#getcheckedformname-string-controlname-string)
+      - [`getbackcolor(formName: string, controlName: string)`](#getbackcolorformname-string-controlname-string-1)
       - [getenable(formName: string, controlName: string): bool](#getenableformname-string-controlname-string-bool)
+      - [`getforecolor(formName: string, controlName: string)`](#getforecolorformname-string-controlname-string)
       - [`getimage(formName: string, pictureBoxName: string)`](#getimageformname-string-pictureboxname-string)
       - [`getitem(listName: string, index: number): any`](#getitemlistname-string-index-number-any)
       - [gettext(formName: string, controlName: string)](#gettextformname-string-controlname-string)
@@ -57,9 +62,11 @@ EasyBite is a beginner-friendly programming language designed to introduce kids 
       - [runapp(appName: string)](#runappappname-string)
       - [setabove(formName: string, targetControlName: string, controlName: string, \[spacing: int\])](#setaboveformname-string-targetcontrolname-string-controlname-string-spacing-int)
       - [`setalignment(formName: string, controlName: string, alignment: string)`](#setalignmentformname-string-controlname-string-alignment-string)
+      - [`setbackcolor(formName: string, controlName: string, color: string)`](#setbackcolorformname-string-controlname-string-color-string)
       - [setbelow(formName: string, targetControlName: string, controlName: string, \[spacing: int\])](#setbelowformname-string-targetcontrolname-string-controlname-string-spacing-int)
       - [setdock(formName: string, controlName: string, dockStyle: string)](#setdockformname-string-controlname-string-dockstyle-string)
       - [setenable(formName: string, controlName: string, enable: bool)](#setenableformname-string-controlname-string-enable-bool)
+      - [`setforecolor(formName: string, controlName: string, color: string)`](#setforecolorformname-string-controlname-string-color-string)
       - [`setimage(formName: string, pictureBoxName: string, imagePath: string)`](#setimageformname-string-pictureboxname-string-imagepath-string)
       - [`setitem(listName: string, index: number, value: any)`](#setitemlistname-string-index-number-value-any)
       - [setleft(formName: string, targetControlName: string, controlName: string, \[spacing: int\])](#setleftformname-string-targetcontrolname-string-controlname-string-spacing-int)
@@ -493,13 +500,13 @@ In EasyBite, a dictionary is a collection of key-value pairs. Dictionaries allow
 
 Example:
 ```vbnet
-set person to {"name": "John", "age": 25, "city": "New York"}
+set person to {"name": "Goni", "age": 25, "city": "New York"}
 
-show person["name"]  // Output: John
+show person["name"]  // Output: Goni
 show person["age"]   // Output: 25
 ```
 
-In the example above, we create a dictionary `person` with three key-value pairs: "name" mapped to the value "John", "age" mapped to the value 25, and "city" mapped to the value "New York".
+In the example above, we create a dictionary `person` with three key-value pairs: "name" mapped to the value "Goni", "age" mapped to the value 25, and "city" mapped to the value "New York".
 
 You can access the values in a dictionary by specifying the corresponding key in square brackets (`dictionary[key]`). This allows you to retrieve the value associated with a specific key.
 
@@ -824,6 +831,252 @@ show arr.indexof(7)  // Output: -1
 
 ---
 
+### Dictionary Library
+
+#### EasyBite Dictionary Functions
+
+The following functions are available for dictionary operations in EasyBite:
+
+| Function                                      | Description                                                                                              |
+|-----------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| `dictadd(dictionary: dict, key: any, value: any) -> dict`        | Adds a key-value pair to the dictionary.                                                                |
+| `dictget(dictionary: dict, key: any) -> any`                      | Retrieves the value associated with a given key from the dictionary.                                      |
+| `dictremove(dictionary: dict, key: any) -> dict`                   | Removes the key-value pair with the specified key from the dictionary.                                   |
+| `dictcontainskey(dictionary: dict, key: any) -> bool`             | Checks if the dictionary contains a specific key.                                                        |
+| `dictcontainsvalue(dictionary: dict, value: any) -> bool`         | Checks if the dictionary contains a specific value.                                                      |
+| `dictsize(dictionary: dict) -> int`                               | Returns the number of key-value pairs in the dictionary.                                                 |
+| `dictkeys(dictionary: dict) -> list`                              | Returns a list of all keys in the dictionary.                                                            |
+| `dictvalues(dictionary: dict) -> list`                            | Returns a list of all values in the dictionary.                                                          |
+| `dictisempty(dictionary: dict) -> bool`                           | Checks if the dictionary is empty.                                                                       |
+| `dictclear(dictionary: dict) -> dict`                             | Removes all key-value pairs from the dictionary.                                                         |
+| `dictupdate(dictionary: dict, key: any, value: any) -> dict`       | Updates the value associated with a given key in the dictionary.                                          |
+| `dictmerge(dictionary: dict, otherDictionary: dict) -> dict`       | Merges another dictionary into the current dictionary.                                                   |
+| `dictcopy(dictionary: dict) -> dict`                              | Creates a shallow copy of the dictionary.                                                                |
+| `dicttojson(dictionary: dict) -> str`                             | Converts the dictionary to a JSON string.                                                                |
+| `dicttofile(dictionary: dict, filename: str)`                     | Writes the dictionary to a file in JSON format.                                                          |
+
+The EasyBite dictionary functions accept specific parameter types to perform various operations on dictionaries:
+
+- `dictionary` (dict): The dictionary object on which the operation is performed.
+- `key` (any): The key used for adding, retrieving, updating, or removing a key-value pair.
+- `value` (any): The value associated with the key in the dictionary.
+- `otherDictionary` (dict): Another dictionary object to be merged into the current dictionary.
+- `filename` (str): The name of the file to which the dictionary is written in JSON format.
+
+The return types of these functions are as follows:
+
+- `dict`: The dictionary object after performing the operation.
+- `any`: The value associated with the specified key.
+- `bool`: A boolean value indicating the result of the operation.
+- `int`: The number of key-value pairs in the dictionary.
+- `list`: A list containing either the keys or values from the dictionary.
+- `str`: A JSON string representation of the dictionary.
+
+By providing the appropriate parameter types, you can effectively work with dictionaries in EasyBite and perform various operations on them.
+
+<details>
+<summary> Example of Dictionary functions usage
+</summary>
+
+The following functional examples demonstrate the usage of EasyBite dictionary functions:
+
+`dictadd(dictionary: dict, key: any, value: any) -> dict`
+
+Adds a key-value pair to the dictionary.
+
+Example:
+
+```vbnet
+set myDict to {}
+dictadd(myDict, "name", "Goni")
+dictadd(myDict, "age", 25)
+show myDict
+```
+
+`dictget(dictionary: dict, key: any) -> any`
+
+Retrieves the value associated with a given key from the dictionary.
+
+Example:
+
+```vbnet
+set myDict to {} // Empty dictionary
+dictadd(myDict, "name", "Goni")
+dictadd(myDict, "age", 25)
+set nameValue to dictget(myDict, "name")
+show nameValue // Output: Goni
+```
+
+`dictremove(dictionary: dict, key: any) -> dict`
+
+Removes the key-value pair with the specified key from the dictionary.
+
+Example:
+
+```vbnet
+set myDict
+dictadd(myDict, "name", "Goni")
+dictadd(myDict, "age", 25)
+dictremove(myDict, "age")
+show myDict
+```
+
+`dictcontainskey(dictionary: dict, key: any) -> bool`
+
+Checks if the dictionary contains a specific key.
+
+Example:
+
+```vbnet
+set myDict to {}
+dictadd(myDict, "name", "Goni")
+set containsValue to dictcontainsvalue(myDict, "name")
+show containsValue // Output: true
+```
+`dictcontainsvalue(dictionary: dict, value: any) -> bool`
+
+Checks if the dictionary contains a specific value.
+
+Example:
+
+```vbnet
+set myDict to {}
+dictadd(myDict, "name", "Goni")
+set containsValue to dictcontainsvalue(myDict, "Goni")
+show containsValue // Output: true
+```
+
+`dictsize(dictionary: dict) -> int`
+
+Returns the number of key-value pairs in the dictionary.
+
+Example:
+
+```vbnet
+set myDict to {}
+dictadd(myDict, "name", "Goni")
+dictadd(myDict, "age", 25)
+set sizeValue to dictsize(myDict)
+show sizeValue // Output: 2
+```
+
+`dictkeys(dictionary: dict) -> list`
+
+Returns a list of all keys in the dictionary.
+
+Example:
+
+```vbnet
+set myDict to {}
+dictadd(myDict, "name", "Goni")
+dictadd(myDict, "age", 25)
+set keysList to dictkeys(myDict)
+show keysList // Output: ["name", "age"]
+```
+`dictvalues(dictionary: dict) -> list`
+
+Returns a list of all values in the dictionary.
+
+Example:
+
+```vbnet
+set myDict to {}
+dictadd(myDict, "name", "Goni")
+dictadd(myDict, "age", 25)
+set valuesList to dictvalues(myDict)
+show valuesList // Output: ["Goni", 25]
+```
+`dictisempty(dictionary: dict) -> bool`
+
+Checks if the dictionary is empty.
+
+Example:
+
+```vbnet
+set myDict to {}
+set isEmptyValue to dictisempty(myDict)
+show isEmptyValue // Output: true
+```
+`dictclear(dictionary: dict) -> dict`
+
+Removes all key-value pairs from the dictionary.
+
+Example:
+```vbnet
+set myDict to {}
+dictadd(myDict, "name", "Goni")
+dictadd(myDict, "age", 25)
+dictclear(myDict)
+show myDict
+```
+</details>
+
+`dictmerge(dictionary: dict, otherDictionary: dict) -> dict`
+
+Merges another dictionary into the current dictionary.
+
+Example:
+```vbnet
+set myDict to {}
+dictadd(myDict, "name", "Goni")
+
+set additionalDict to {}
+dictadd(additionalDict, "city", "New York")
+dictadd(additionalDict, "country", "USA")
+
+dictmerge(myDict, additionalDict)
+```
+
+`dictcopy(dictionary: dict) -> dict`
+
+Creates a shallow copy of the dictionary.
+
+Example:
+```vbnet
+set myDict to {}
+dictadd(myDict, "name", "Goni")
+set copiedDict to dictcopy(myDict)
+show(copiedDict) 
+```
+
+`dicttojson(dictionary: dict) -> str`
+
+Converts the dictionary to a JSON string.
+
+Example:
+```vbnet
+set myDict to {}
+dictadd(myDict, "name", "Goni")
+dictadd(myDict, "age", 25)
+set jsonString to dicttojson(myDict)
+show jsonString // Output: {"name": "Goni", "age": 25}
+```
+
+`dicttofile(dictionary: dict, filename: str)`
+
+Writes the dictionary to a file in JSON format.
+
+Example:
+```vbnet
+set myDict to {}
+dictadd(myDict, "name", "Goni")
+dictadd(myDict, "age", 25)
+dicttofile(myDict, "data.json")
+```
+---
+
+`dictupdate(dictionary: dict, key: any, value: any) -> dict`
+
+Updates the value associated with a given key in the dictionary.
+
+Example:
+```vbnet
+set myDict to {}
+dictadd(myDict, "name", "Goni")
+dictupdate(myDict, "name", "Jane")
+show myDict
+```
+
 ### DateTime Library
 
 Includes functions to handle date and time operations, such as getting current date and time, formatting dates, and performing date calculations.
@@ -906,49 +1159,55 @@ show timeparse(timeString, format)  // Output: parsed time from the timeString u
 
 Offers functions for creating graphical user interfaces (GUI), interacting with user inputs, and displaying user interface elements.
 
-| Function Name | Description |
-|---------------|-------------|
-| `button(formName, buttonText, clickHandler)` | Creates a button on the specified form with the given text and click handler. |
-| `checkbox(formName, controlName, text, isChecked, x, y)` | Creates a check box control on the specified form with the given properties. |
-| `combobox(formName, labelText, top, left, width, height)` | Creates a combo box control on the specified form with the given properties. |
-| `getchecked(formName, controlName)` | Gets the checked state of a check box or radio button control on a form. |
-| `getdock(formName, controlName)` | Gets the docking style of a control on a form. |
-| `getenable(formName, controlName)` | Gets the enabled state of a control on a form. |
-| `getimage(formName, pictureBoxName)` | Retrieves the image from the specified picture box control on the specified form and returns the temporary file path where the image is saved. |
-| `getitem(formName, comboBoxName, index)` | Retrieves the item at the specified index from a combo box control on a form. |
-| `gettext(formName, controlName)` | Retrieves the text of the specified control on the specified form. |
-| `getvalue(formName, progressBarName)` | Gets the current value of a progress bar control on a form. |
-| `getvisible(formName, controlName)` | Gets the visibility of a control on a form. |
-| `getx(formName, controlName)` | Gets the X position of a control on a form. |
-| `gety(formName, controlName)` | Gets the Y position of a control on a form. |
-| `groupbox(formName, text, left, top)` | Creates a group box control on the specified form with the given properties. |
-| `hideform(formName)` | Hides the form with the specified name. |
-| `label(formName, text, fontName, fontSize, fontStyle, foreColor, backColor, top, left)` | Creates a label control on the specified form with the given properties. |
-| `listbox(formName, labelText, top, left, width, height)` | Creates a list box control on the specified form with the given properties. |
-| `messagebox(...args)` | Displays a message box with the specified arguments. |
-| `panel(formName, left, top)` | Creates a panel control on the specified form with the given properties. |
-| `progressbar(formName, names, minimum, maximum, value, width, height, top, left)` | Creates a progress bar control on the specified form with the given properties. |
-| `radiobutton(formName, controlName, text, isChecked, x, y)` | Creates a radio button control on the specified form with the given properties. |
-| `runapp(appName)` | Runs the specified application. |
-| `setabove(formName, targetControlName, controlName, spacing)` | Sets the position of the control above another control on the specified form with the given spacing. |
-| `setalignment(formName, controlName, alignment)` | Sets the text alignment of a control on a form. |
-| `setbelow(formName, targetControlName, controlName, spacing)` | Sets the position of the control below another control on the specified form with the given spacing. |
-| `setchecked(formName, controlName, isChecked)` | Sets the checked state of a check box or radio button control on a form. |
-| `setdock(formName, controlName, dockStyle)` | Sets the docking style of a control on a form. |
-| `setenable(formName, controlName, enable)` | Sets the enabled state of a control on a form. |
-| `setimage(formName, pictureBoxName, imagePath)` | Sets the image of the specified picture box control on the specified form using the provided image file path. |
-| `setitem(formName, comboBoxName, item)` | Adds an item to a combo box control on a form. |
-| `setleft(formName, targetControlName, controlName, spacing)` | Sets the left position of a control relative to another control on a form. |
-| `setlocation(formName, controlName, x, y)` | Sets the location (X and Y coordinates) of a control on a form. |
-| `setminmax(formName, progressBarName, minimum, maximum)` | Sets the minimum and maximum values of a progress bar control on a form. |
-| `setright(formName, targetControlName, controlName, spacing)` | Sets the right position of a control relative to another control on a form. |
+| Function Name                                                       | Description                                                                                                      |
+|--------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| `createform(formName, width, height)`                               | Creates a new form with the specified name, width, and height.                                                    |
+| `button(formName, buttonText, clickHandler)`                        | Creates a button on the specified form with the given text and click handler.                                    |
+| `checkbox(formName, controlName, text, isChecked, x, y)`            | Creates a check box control on the specified form with the given properties.                                     |
+| `combobox(formName, labelText, top, left, width, height)`           | Creates a combo box control on the specified form with the given properties.                                     |
+| `getchecked(formName, controlName)`                                 | Gets the checked state of a check box or radio button control on a form.                                          |
+| `getdock(formName, controlName)`                                    | Gets the docking style of a control on a form.                                                                    |
+| `getenable(formName, controlName)`                                  | Gets the enabled state of a control on a form.                                                                    |
+| `getimage(formName, pictureBoxName)`                                | Retrieves the image from the specified picture box control on the specified form and returns the temporary file path where the image is saved. |
+| `getitem(formName, comboBoxName, index)`                            | Retrieves the item at the specified index from a combo box control on a form.                                    |
+| `gettext(formName, controlName)`                                    | Retrieves the text of the specified control on the specified form.                                                |
+| `getvalue(formName, progressBarName)`                               | Gets the current value of a progress bar control on a form.                                                       |
+| `getvisible(formName, controlName)`                                 | Gets the visibility of a control on a form.                                                                       |
+| `getx(formName, controlName)`                                       | Gets the X position of a control on a form.                                                                       |
+| `gety(formName, controlName)`                                       | Gets the Y position of a control on a form.                                                                       |
+| `getbackcolor(formName, controlName)`                               | Gets the background color of a control on a form.                                                                 |
+| `getforecolor(formName, controlName)`                               | Gets the foreground color of a control on a form.                                                                 |
+| `groupbox(formName, text, left, top)`                               | Creates a group box control on the specified form with the given properties.                                     |
+| `hideform(formName)`                                                | Hides the form with the specified name.                                                                           |
+| `label(formName, text, fontName, fontSize, fontStyle, foreColor, backColor, top, left)` | Creates a label control on the specified form with the given properties.                      |
+| `listbox(formName, labelText, top, left, width, height)`            | Creates a list box control on the specified form with the given properties.                                      |
+| `messagebox(...args)`                                               | Displays a message box with the specified arguments.                                                              |
+| `panel(formName, left, top)`                                        | Creates a panel control on the specified form with the given properties.                                          |
+| `progressbar(formName, names, minimum, maximum, value, width, height, top, left)` | Creates a progress bar control on the specified form with the given properties.          |
+| `radiobutton(formName, controlName, text, isChecked, x, y)`         | Creates a radio button control on the specified form with the given properties.                                   |
+| `runapp(appName)`                                                   | Runs the specified application.                                                                                   |
+| `setabove(formName, targetControlName, controlName, spacing)`       | Sets the position of the control above another control on the specified form with the given spacing.             |
+| `setalignment(formName, controlName, alignment)`                    | Sets the text alignment of a control on a form.                                                                   |
+| `setbackcolor(formName, controlName, color)`                        | Sets the background color of the specified control on the specified form.                                        |
+| `setbelow(formName, targetControlName, controlName, spacing)`       | Sets the position of the control below another control on the specified form with the given spacing.             |
+| `setchecked(formName, controlName, isChecked)`                      | Sets the checked state of a check box or radio button control on a form.                                          |
+| `setdock(formName, controlName, dockStyle)`                         | Sets the docking style of a control on a form.                                                                    |
+| `setenable(formName, controlName, enable)`                          | Sets the enabled state of a control on a form.                                                                    |
+| `setforecolor(formName, controlName, color)`                        | Sets the foreground color of the specified control on the specified form.                                        |
+| `setimage(formName, pictureBoxName, imagePath)`                     | Sets the image of the specified picture box control on the specified form using the provided image file path.    |
+| `setitem(formName, comboBoxName, item)`                             | Adds an item to a combo box control on a form.                                                                    |
+| `setleft(formName, targetControlName, controlName, spacing)`        | Sets the left position of a control relative to another control on a form.                                        |
+| `setlocation(formName, controlName, x, y)`                          | Sets the location (X and Y coordinates) of a control on a form.                                                   |
+| `setminmax(formName, progressBarName, minimum, maximum)`            | Sets the minimum and maximum values of a progress bar control on a form.                                          |
+| `setright(formName, targetControlName, controlName, spacing)`       | Sets the right position of a control relative to another control on a form.                                       |
 | `setstyle(formName, controlName, fontName, fontSize, fontStyle, foreColor, backColor)` | Sets the style properties (font, size, style, forecolor, backcolor) of the specified control on the specified form. |
-| `settext(formName, controlName, text)` | Sets the text of the specified control on the specified form. |
-| `setvalue(formName, progressBarName, value)` | Sets the current value of a progress bar control on a form. |
-| `setvisible(formName, controlName, visible)` | Sets the visibility of a control on a form. |
-| `showdialog(dialogName)` | Shows the dialog with the specified name. |
-| `showform(formName)` | Shows the form with the specified name. |
-| `textbox(formName, fontName, fontSize, fontStyle, foreColor, backColor, top, left)` | Creates a text box control on the specified form with the given properties. |
+| `settext(formName, controlName, text)`                              | Sets the text of the specified control on the specified form.                                                     |
+| `setvalue(formName, progressBarName, value)`                        | Sets the current value of a progress bar control on a form.                                                        |
+| `setvisible(formName, controlName, visible)`                        | Sets the visibility of a control on a form.                                                                       |
+| `showdialog(dialogName)`                                            | Shows the dialog with the specified name.                                                                         |
+| `showform(formName)`                                                | Shows the form with the specified name.                                                                           |
+| `textbox(formName, fontName, fontSize, fontStyle, foreColor, backColor, top, left)` | Creates a text box control on the specified form with the given properties.                    |
+
 
 #### **Detailed Explanation**
 
@@ -1057,6 +1316,22 @@ set form to createform("myForm", 800, 600)
 runapp(form)
 
 ```
+#### `getbackcolor(formName: string, controlName: string)`
+
+Gets the background color of the specified control on the specified form.
+
+- `formName` (string): The name of the form containing the control.
+- `controlName` (string): The name of the control.
+
+**Returns**: The background color of the control as a string value. This can be a color name or a hexadecimal color code.
+
+**Example Usage**:
+
+```vbnet
+// Get the background color of a control named "myControl" on a form named "myForm"
+Dim backColor As String = getbackcolor("myForm", "myControl")
+Console.WriteLine("Background Color: " & backColor)
+```
 
 #### getdock(formName: string, controlName: string): string
 
@@ -1097,7 +1372,22 @@ Returns:
 // Get the checked state of a checkbox named "myCheckbox" on a form named "myForm"
 set isChecked to getchecked("myForm", "myCheckbox")
 ```
+#### `getbackcolor(formName: string, controlName: string)`
 
+Gets the background color of the specified control on the specified form.
+
+- `formName` (string): The name of the form containing the control.
+- `controlName` (string): The name of the control.
+
+**Returns**: The background color of the control as a string value. This can be a color name or a hexadecimal color code.
+
+**Example Usage**:
+
+```vbnet
+// Get the background color of a control named "myControl" on a form named "myForm"
+set backColor to getbackcolor("myForm", "myControl")
+show("Background Color: " & backColor)
+```
 
 #### getenable(formName: string, controlName: string): bool
 
@@ -1115,6 +1405,24 @@ Returns:
 // Get the enable state of a control named "myControl" on a form named "myForm"
 set isControlEnabled to getenable("myForm", "myControl")
 ```
+
+#### `getforecolor(formName: string, controlName: string)`
+
+Gets the foreground color of the specified control on the specified form.
+
+- `formName` (string): The name of the form containing the control.
+- `controlName` (string): The name of the control.
+
+**Returns**: The foreground color of the control as a string value. This can be a color name or a hexadecimal color code.
+
+**Example Usage**:
+
+```vbnet
+// Get the foreground color of a control named "myControl" on a form named "myForm"
+set foreColor to getforecolor("myForm", "myControl")
+show("Foreground Color: " + foreColor)
+```
+
 #### `getimage(formName: string, pictureBoxName: string)`
 
 Retrieves the image from a PictureBox control on the specified form.
@@ -1546,6 +1854,23 @@ Sets the alignment of a control on the specified form.
 setalignment("myForm", "titleLabel", "center")
 ```
 
+#### `setbackcolor(formName: string, controlName: string, color: string)`
+
+Sets the background color of the specified control on the specified form.
+
+- `formName` (string): The name of the form containing the control.
+- `controlName` (string): The name of the control.
+- `color` (string): The color value to set as the background color. This can be a color name (e.g., "blue") or a hexadecimal color code (e.g., "#0000FF").
+
+**Returns**: None.
+
+**Example Usage**:
+
+```vbnet
+// Set the background color of a control named "myControl" on a form named "myForm" to blue
+setbackcolor("myForm", "myControl", "blue")
+```
+
 #### setbelow(formName: string, targetControlName: string, controlName: string, [spacing: int])
 
 Sets the specified control below another control on the form with optional spacing.
@@ -1606,6 +1931,23 @@ Returns:
 // Enable a control named "myControl" on a form named "myForm"
 setenable("myForm", "myControl", true)
 ```
+#### `setforecolor(formName: string, controlName: string, color: string)`
+
+Sets the foreground color of the specified control on the specified form.
+
+- `formName` (string): The name of the form containing the control.
+- `controlName` (string): The name of the control.
+- `color` (string): The color value to set as the foreground color. This can be a color name (e.g., "red") or a hexadecimal color code (e.g., "#FF0000").
+
+**Returns**: None.
+
+**Example Usage**:
+
+```vbnet
+// Set the foreground color of a control named "myControl" on a form named "myForm" to red
+setforecolor("myForm", "myControl", "red")
+```
+
 #### `setimage(formName: string, pictureBoxName: string, imagePath: string)`
 
 Sets the image of a PictureBox control on the specified form.
@@ -2177,7 +2519,7 @@ set query to sqlite_query(connect, createTableQuery)
 if (query != false) then
 
     declare insertQuery
-    set insertQuery to "INSERT INTO users (name, age) VALUES ('John Doe', 25)"
+    set insertQuery to "INSERT INTO users (name, age) VALUES ('Goni Doe', 25)"
     
     if (sqlite_query(connect, insertQuery) != false) then
 
