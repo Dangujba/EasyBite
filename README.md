@@ -1009,7 +1009,7 @@ dictadd(myDict, "age", 25)
 dictclear(myDict)
 show myDict
 ```
-</details>
+
 
 `dictmerge(dictionary: dict, otherDictionary: dict) -> dict`
 
@@ -1076,6 +1076,7 @@ dictadd(myDict, "name", "Goni")
 dictupdate(myDict, "name", "Jane")
 show myDict
 ```
+</details>
 
 ### DateTime Library
 
