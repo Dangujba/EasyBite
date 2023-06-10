@@ -129,7 +129,7 @@ In the meantime, we provide the following steps for configuring indentation and 
 1. Open Sublime Text and go to "Preferences" in the top menu.
 2. Select "Browse Packages" from the dropdown menu. This will open the Packages folder in your file explorer.
 3. Create a new folder inside the Packages folder and name it "EasyBite" (or any name you prefer).
-4. Inside the "EasyBite" folder, download the "EasyBite.sublime-syntax" and "EasyBite.tmPreferences" files from the [EasyBite GitHub repository](https://github.com/Dangujba).
+4. Inside the "EasyBite" folder, download the "EasyBite.sublime-syntax" and "EasyBite.tmPreferences" files from the [EasyBite GitHub repository](https://github.com/Dangujba/EasyBite/tree/main/bin).
 5. Move the downloaded files into the "EasyBite" folder.
 
 Next, we'll configure the indentation rules for EasyBite:
