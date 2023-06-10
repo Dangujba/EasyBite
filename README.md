@@ -214,6 +214,7 @@ Keywords, also known as reserved words, are words that have a special meaning an
 | `<`      | Less than                              |
 | `<=`     | Less than or equal to                   |
 | `>=`     | Greater than or equal to                |
+| `!=`     | Not equal to                |
 
 ### Examples
 
@@ -2714,7 +2715,7 @@ Thank you for your help in improving EasyBite! Your feedback is highly valuable 
 
 ### Code of Conduct
 
-We value an inclusive and respectful community. Please review our [Code of Conduct](https://github.com/your_username/EasyBite/blob/main/CODE_OF_CONDUCT.md) to understand the guidelines and expectations for participating in the EasyBite community. We strive to maintain a safe and welcoming environment for all contributors.
+We value an inclusive and respectful community. Please review our [Code of Conduct](https://github.com/Dangujba/EasyBite/blob/main/CODE_OF_CONDUCT.md) to understand the guidelines and expectations for participating in the EasyBite community. We strive to maintain a safe and welcoming environment for all contributors.
 
 ### Continuous Monitoring and Engagement
 
