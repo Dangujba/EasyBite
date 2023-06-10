@@ -2685,6 +2685,7 @@ show(lastInsertID)
 sqlite_close()
     
 ```
+</details>
 
 ## Contact for Feedback and Bug Reports
 
