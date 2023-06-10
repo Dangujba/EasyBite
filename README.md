@@ -2,9 +2,12 @@
 
 EasyBite is a beginner-friendly programming language designed to introduce kids and beginners to the world of programming. It aims to provide a simple syntax and easy-to-understand concepts while still offering essential programming functionalities.
 
-| Download Setup|
-|---------------|
-|[![Download](https://img.shields.io/badge/Download-Repository-brightgreen)](https://github.com/Dangujba/EasyBite/raw/main/bin/EasyBite.exe)|
+| Download Setup| Download Setup with Example |
+|---------------|-----------------------------|
+|[![Download](https://img.shields.io/badge/Download-Repository-brightgreen)](https://github.com/Dangujba/EasyBite/raw/main/bin/EasyBite.exe)| <a href="https://github.com/username/repository/raw/main/bin/EasyBiteExample.zip" download>
+  <button>Download File</button>
+</a>
+|
 
 
 ## Table of Contents
