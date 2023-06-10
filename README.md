@@ -8,6 +8,7 @@ EasyBite is a beginner-friendly programming language designed to introduce kids 
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
   - [Syntax](#syntax)
+    - [Syntax Highlight](#syntax-highlight)
     - [Comments](#comments)
     - [Keywords](#keywords)
     - [Operators](#operators)
@@ -88,17 +89,54 @@ EasyBite is a beginner-friendly programming language designed to introduce kids 
       - [Examples](#examples-2)
     - [SQLite Library](#sqlite-library)
       - [SQLite Functions](#sqlite-functions)
+  - [Contact for Feedback and Bug Reports](#contact-for-feedback-and-bug-reports)
+    - [Bug Reporting Guidelines](#bug-reporting-guidelines)
+    - [Code of Conduct](#code-of-conduct)
+    - [Continuous Monitoring and Engagement](#continuous-monitoring-and-engagement)
 ## Installation
 
 To use EasyBite, you need to have the EasyBite interpreter installed on your machine. Follow the steps below to install it:
 
-1. Download the EasyBite interpreter from the [official website](https://www.easybite-lang.com/downloads).
+1. Download the EasyBite interpreter from the [official website](https://www.easybite-lang.com/downloads) or download it here in github at the top.
 2. Run the installer and follow the installation instructions.
-3. Once the installation is complete, you can use the EasyBite interpreter from the command line.
-4. You can simply write `EasyBite yourfilename.bite` for running.
+3. During the installation process, the installer will check if .NET Framework 4.6 or later is already installed on your machine. If it is detected, the installation will proceed to the next step. If it is not detected, you will be prompted with two options:
+   - Option 1: Download and install .NET Framework from the official Microsoft website. Choose this option if you prefer to download and install .NET Framework separately. Follow the instructions provided by the installer to complete the installation.
+   - Option 2: Install .NET Framework from the EasyBite setup. Choose this option if you want to install EasyBite along with the required .NET Framework version in one step. The EasyBite setup will automatically install .NET Framework for you.
+4. Once the installation is complete, you can use the EasyBite interpreter from the command line.
+5. To run an EasyBite file, open the command prompt or terminal and navigate to the directory where your EasyBite file is located.
+6. Type `EasyBite yourfilename.bite` and press Enter to execute the EasyBite program.
+
+If you encounter any issues during the installation process or have any questions, please don't hesitate to contact us at muhammadgoni51@gmail.com. We are here to assist you.
+
+
+
 ## Syntax
 
 EasyBite has a simple and intuitive syntax that makes it easy to write and understand code. Here are some key elements of the EasyBite syntax:
+
+### Syntax Highlight
+
+As EasyBite is a relatively new language, it currently does not have native support for syntax highlighting. However, users can follow a process to manually add indentation and syntax highlighting in Sublime Text. While we are actively working on developing an integrated development environment (IDE) for EasyBite, we kindly ask users to be patient and wait for the upcoming release.
+
+In the meantime, we provide the following steps for configuring indentation and syntax highlighting in Sublime Text for EasyBite:
+
+1. Open Sublime Text and go to "Preferences" in the top menu.
+2. Select "Browse Packages" from the dropdown menu. This will open the Packages folder in your file explorer.
+3. Create a new folder inside the Packages folder and name it "EasyBite" (or any name you prefer).
+4. Inside the "EasyBite" folder, download the "EasyBite.sublime-syntax" and "EasyBite.tmPreferences" files from the [EasyBite GitHub repository](https://github.com/Dangujba).
+5. Move the downloaded files into the "EasyBite" folder.
+
+Next, we'll configure the indentation rules for EasyBite:
+
+1. Open Sublime Text and go to "Preferences" in the top menu.
+2. Select "Settings" from the dropdown menu. This will open the Sublime Text settings file.
+3. Add the following line to the settings file: `"translate_tabs_to_spaces": true`. This ensures that indentation is based on spaces instead of tabs.
+4. Save the settings file.
+
+After completing these steps, Sublime Text should recognize and apply the indentation and syntax highlighting rules for EasyBite files. When you open a file with the ".bite" extension or explicitly set the syntax to EasyBite, Sublime Text will provide proper indentation and highlight the syntax elements according to the defined rules.
+
+Please note that these manual configurations serve as a temporary solution until the official EasyBite IDE is released. We appreciate your patience and understanding as we work towards providing a more streamlined and user-friendly development environment for EasyBite.
+
 
 ### Comments
 
@@ -107,8 +145,26 @@ Use the double forward-slash (`//`) to add single-line comments in your code.
 ```vbnet
 // This is a comment
 ```
+**Note:** Multiline comment is not yet supported.
 
 ### Keywords
+
+Keywords, also known as reserved words, are words that have a special meaning and purpose in a programming language. These words are predefined by the language and cannot be used as identifiers (such as variable names, function names, etc.) because they are reserved for specific purposes within the language's syntax and grammar.
+
+| Keyword  | Keyword  | Keyword  | Keyword  | Keyword  |
+|-----------|-----------|-----------|-----------|-----------|
+| declare   | set       | show      | if        | then      |
+| else      | end if    | for       | from      | to        |
+| step      | generate  | by        | stop      | repeat    |
+| while     | times     | iterate   | over      | choose    |
+| when      | otherwise | true      | false     | function  |
+| return    | end function |           |           |           |
+
+| Reserved  | Reserved  | Reserved | Reserved  | Reserved|
+|--------------------|--------------------|--------------------|--------------------|--------------------|
+| class              | new                | method             | inheritance        | secret             |
+| public             |                    |                    |                    |                    |
+
 | Keyword     | Description                                       |
 |-------------|---------------------------------------------------|
 | `declare`   | Used for variable declaration                      |
@@ -250,6 +306,55 @@ In the example above, the `input()` function is used to prompt the user to enter
 You can use the `input()` function to get user input for various purposes and perform operations based on that input.
 
 Please note that the input and output in EasyBite may depend on the environment or platform where the code is executed. The above example demonstrates the basic usage of input and output in EasyBite, but the exact behavior may vary depending on the implementation.
+
+**Print Statement (`show`)**
+
+The `show` statement is used in EasyBite to print the value of an expression to the console. It provides a convenient way to display output during program execution.
+
+**Syntax**
+
+The `show` statement can be written in two forms:
+
+1. `show expression;`
+2. `show(expression);`
+
+The `expression` can be any valid expression in the EasyBite language.
+
+**Usage Examples**
+
+Here are some examples of how the `show` statement can be used:
+
+**Example 1:**
+```vbnet
+show "Hello, World!";
+```
+
+This statement prints the string "Hello, World!" to the console.
+
+**Example 2:**
+```vbnet
+show(5 + 3 * 2);
+```
+
+This statement evaluates the expression `5 + 3 * 2` (which is equal to 11) and prints the result (11) to the console.
+
+**Example 3:**
+```vbnet
+set x to "EasyBite";
+show("Welcome to " + x);
+```
+
+In this example, a variable `x` is defined with the value "EasyBite". The `show` statement concatenates the string "Welcome to " with the value of `x` and prints the result ("Welcome to EasyBite") to the console.
+
+**Notes**
+
+- The `show` statement is a convenient way to display output during program execution.
+- The parentheses around the expression in the second form (`show(expression);`) are optional. The statement can also be written as `show expression;`.
+- The `show` statement can be used with any valid expression in EasyBite, including variables, literals, and complex expressions involving arithmetic operations, string concatenation, function calls, etc.
+
+Remember that this documentation assumes familiarity with the EasyBite language and its syntax. If you have any further questions or need additional assistance, please don't hesitate to ask!
+
+
 
 ### **If Statement**
 
@@ -887,6 +992,8 @@ Adds a key-value pair to the dictionary.
 Example:
 
 ```vbnet
+import "Dict"
+
 set myDict to {}
 dictadd(myDict, "name", "Goni")
 dictadd(myDict, "age", 25)
@@ -900,6 +1007,8 @@ Retrieves the value associated with a given key from the dictionary.
 Example:
 
 ```vbnet
+import "Dict"
+
 set myDict to {} // Empty dictionary
 dictadd(myDict, "name", "Goni")
 dictadd(myDict, "age", 25)
@@ -914,6 +1023,8 @@ Removes the key-value pair with the specified key from the dictionary.
 Example:
 
 ```vbnet
+import "Dict"
+
 set myDict
 dictadd(myDict, "name", "Goni")
 dictadd(myDict, "age", 25)
@@ -928,6 +1039,8 @@ Checks if the dictionary contains a specific key.
 Example:
 
 ```vbnet
+import "Dict"
+
 set myDict to {}
 dictadd(myDict, "name", "Goni")
 set containsValue to dictcontainsvalue(myDict, "name")
@@ -940,6 +1053,8 @@ Checks if the dictionary contains a specific value.
 Example:
 
 ```vbnet
+import "Dict"
+
 set myDict to {}
 dictadd(myDict, "name", "Goni")
 set containsValue to dictcontainsvalue(myDict, "Goni")
@@ -2570,3 +2685,36 @@ show(lastInsertID)
 sqlite_close()
     
 ```
+
+## Contact for Feedback and Bug Reports
+
+- **Email**: You can reach out to me directly via email at [muhammadgoni51@gmail.com](mailto:muhammadgoni51@gmail.com) for any feedback, suggestions, or bug reports related to EasyBite. Please use a descriptive subject line to ensure your message gets attention.
+
+- **Issue Tracker**: If you encounter any bugs or would like to request new features, please use the GitHub issue tracker in this repository. Follow these steps to create a new issue:
+  1. Go to the [Issues](https://github.com/Dangujba/EasyBite/issues) tab of this repository.
+  2. Click on the "New Issue" button.
+  3. Provide a clear and concise title for the issue.
+  4. In the issue description, explain the problem or suggestion in detail. Include any relevant information such as steps to reproduce the issue, error messages, or screenshots if applicable.
+  5. Choose the appropriate issue template if available, or leave it as a blank issue.
+  6. Click on "Submit new issue" to create the issue.
+
+- **Community Forum**: Join our dedicated EasyBite community forum to connect with other users, ask questions, and engage in discussions. Visit the [EasyBite Community Forum](https://community.easybite.org) to register and participate. We encourage you to share your experiences, ideas, and feedback with the community.
+
+### Bug Reporting Guidelines
+
+To ensure efficient bug tracking and resolution, please follow these guidelines when submitting bug reports:
+
+- Provide detailed steps to reproduce the issue. Include the version of EasyBite you are using, your operating system, and any relevant error messages or logs.
+- If possible, isolate the issue and create a minimal example that demonstrates the problem.
+- Attach any relevant files or screenshots that can help us understand and reproduce the issue.
+- If you encounter multiple issues, please create separate bug reports for each.
+
+Thank you for your help in improving EasyBite! Your feedback is highly valuable to us.
+
+### Code of Conduct
+
+We value an inclusive and respectful community. Please review our [Code of Conduct](https://github.com/your_username/EasyBite/blob/main/CODE_OF_CONDUCT.md) to understand the guidelines and expectations for participating in the EasyBite community. We strive to maintain a safe and welcoming environment for all contributors.
+
+### Continuous Monitoring and Engagement
+
+I will actively monitor the provided communication channels, including email and the issue tracker, to respond to your feedback, bug reports, and observations. I aim to provide timely assistance, updates, and resolutions to ensure the best experience with EasyBite.
