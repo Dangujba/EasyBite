@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>name</key>
+  <string>EasyBite</string>
+  <key>scope</key>
+  <string>source.bite</string>
+  <key>settings</key>
+  <dict>
+    <key>shellVariables</key>
+    <array>
+      <dict>
+        <key>name</key>
+        <string>TM_COMMENT_START</string>
+        <key>value</key>
+        <string># </string>
+      </dict>
+    </array>
+    <key>increaseIndentPattern</key>
+    <string>^\s*(if|else if|else|generate|repeat|iterate|choose|function|for|when|otherwise)\b.*\bthen\b|\bend for\b|\bstop\b|^\s*(for|generate)\s+\w+\s+from\s+\w+\s+to\s+\w+</string>
+    <key>decreaseIndentPattern</key>
+    <string>^\s*(end if|end for|stop|end repeat|end iterate|end choose|end function)\b</string>
+    <key>indentNextLinePattern</key>
+    <string>^\s*(if|else if|else|generate|repeat|iterate|choose|function|for|when|otherwise)\b</string>
+    <key>indentationRules</key>
+    <array>
+      <dict>
+        <key>increaseIndentPattern</key>
+        <string>^\s*(if|else if|else|generate|repeat|iterate|choose|function|for|when|otherwise)\b.*\bthen\b|\bend for\b|\bstop\b|^\s*(for|generate)\s+\w+\s+from\s+\w+\s+to\s+\w+</string>
+        <key>decreaseIndentPattern</key>
+        <string>^\s*(end if|end for|stop|end repeat|end iterate|end choose|end function)\b</string>
+        <key>indentNextLinePattern</key>
+        <string>^\s*(if|else if|else|generate|repeat|iterate|choose|function|for|when|otherwise)\b</string>
+        <key>indent</key>
+        <string>   </string>
+      </dict>
+    </array>
+  </dict>
+</dict>
+</plist>
