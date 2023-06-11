@@ -1452,8 +1452,8 @@ Gets the background color of the specified control on the specified form.
 
 ```vbnet
 // Get the background color of a control named "myControl" on a form named "myForm"
-Dim backColor As String = getbackcolor("myForm", "myControl")
-Console.WriteLine("Background Color: " & backColor)
+set backColor to getbackcolor("myForm", "myControl")
+show("Background Color: " + backColor)
 ```
 
 #### getdock(formName: string, controlName: string): string
@@ -1509,7 +1509,7 @@ Gets the background color of the specified control on the specified form.
 ```vbnet
 // Get the background color of a control named "myControl" on a form named "myForm"
 set backColor to getbackcolor("myForm", "myControl")
-show("Background Color: " & backColor)
+show("Background Color: " + backColor)
 ```
 
 #### getenable(formName: string, controlName: string): bool
