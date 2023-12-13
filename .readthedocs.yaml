@@ -8,7 +8,6 @@ version: 2
 build:
   os: ubuntu-22.04
   tools:
-    easybite: "0.1.0"
     dotnet: ">=4.6"
     # Add any other tools if needed
 
