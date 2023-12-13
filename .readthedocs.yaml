@@ -3,6 +3,8 @@ project: EasyBite
 
 # Build settings
 version: 2
+build:
+    os: ubuntu-22.04
 language: csharp
 csharp:
     framework: net46
