@@ -2,7 +2,7 @@
 project: EasyBite
 
 # Build settings
-version: master
+version: 2
 language: csharp
 csharp:
     framework: net46
