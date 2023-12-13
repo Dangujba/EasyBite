@@ -1,0 +1,31 @@
+# Read the Docs configuration file for EasyBite projects
+# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
+
+# Required
+version: 2
+
+# Set the OS, EasyBite version, and other tools you might need
+build:
+  os: ubuntu-22.04
+  tools:
+    easybite: "0.1.0"
+    dotnet: ">=4.6"
+    # You can also specify other tool versions here
+
+# Build documentation in the "docs/" directory
+# Customize this path based on your project's structure
+easybite:
+  configuration: docs/easybite-config.yaml
+  # You can customize EasyBite build settings here
+
+# Optionally build your docs in additional formats such as PDF and ePub
+formats:
+  - pdf
+  # - epub
+
+# Optional but recommended, declare the requirements needed
+# to build your documentation
+# See https://docs.readthedocs.io/en/stable/guides/reproducible-builds.html
+# python:
+#   install:
+#     - requirements: docs/requirements.txt
