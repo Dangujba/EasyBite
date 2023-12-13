@@ -4,37 +4,7 @@ build:
     os: ubuntu-22.04
     tools:
         python: "3.12"
-language: csharp
-csharp:
-    framework: net46
-    compiler_args: ["-target:library"]
 
-# Sphinx settings
-source_suffix: .rst
-extensions:
-    - sphinx.ext.autodoc
-    - sphinx.ext.napoleon
-    - sphinx.ext.viewcode
-    - recommonmark
-    - sphinx_rtd_theme
-
-# Theme settings
-html_theme: sphinx_rtd_theme
-html_theme_options:
-    collapse_navigation: true
-    navigation_depth: 2
-
-# Ignore specific files
-exclude_patterns:
-    - "_build"
-    - "Thumbs.db"
-    - ".DS_Store"
-
-# Recommonmark settings
-source_parsers:
-    recommonmark.parser: MarkdownParser
-
-# Build formats
 formats:
     - pdf
     - epub
