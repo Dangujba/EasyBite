@@ -1,23 +1,40 @@
-# Read the Docs configuration file for EasyBite projects
-# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
+# Project information
+project: EasyBite
 
-# Required
-version: 2
+# Build settings
+version: master
+language: csharp
+csharp:
+    framework: net46
+    compiler_args: ["-target:library"]
 
-# Set the OS, EasyBite version, and other tools you might need
-build:
-  os: ubuntu-22.04
-  tools:
-    dotnet: ">=4.6"
-    # Add any other tools if needed
+# Sphinx settings
+source_suffix: .rst
+extensions:
+    - sphinx.ext.autodoc
+    - sphinx.ext.napoleon
+    - sphinx.ext.viewcode
+    - recommonmark
+    - sphinx_rtd_theme
 
-# Build documentation in the "docs/" directory
-# Customize this path based on your project's structure
-easybite:
-  configuration: docs/easybite-config.yaml
-  # You can customize EasyBite build settings here
+# Theme settings
+html_theme: sphinx_rtd_theme
+html_theme_options:
+    collapse_navigation: true
+    navigation_depth: 2
 
-# Optionally build your docs in additional formats such as PDF and ePub
+# Ignore specific files
+exclude_patterns:
+    - "_build"
+    - "Thumbs.db"
+    - ".DS_Store"
+
+# Recommonmark settings
+source_parsers:
+    recommonmark.parser: MarkdownParser
+
+# Build formats
 formats:
-  - pdf
-  # - epub
+    - pdf
+    - epub
+    - htmlzip
