@@ -1,0 +1,46 @@
+[package]
+name = "EasyBite"
+version = "0.3.0"
+edition = "2024"
+authors = ["Muhammad Baba Goni"] 
+
+[dependencies]
+once_cell = "1.19"
+rand = "0.8"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+chrono = "0.4"
+rusqlite = "0.28"
+mysql = "*"
+lazy_static = "1.4"
+wgpu = "0.19"
+socket2 = "0.4"
+native-tls = "0.2"
+reqwest = { version = "0.11", features = ["blocking", "rustls-tls"] }
+get_if_addrs = "0.5"
+nix = "0.25"
+winapi = { version = "0.3", features = ["fileapi", "winbase"] }
+mac_address = "1.1"
+futures = "0.3"
+uuid = { version = "1.10", features = ["v4"] }
+eframe = "0.31.1"
+parking_lot = "0.12"
+plotters = "0.3.7"
+image = "0.24"
+minifb = "0.27"
+winit = "0.28"
+rfd = "0.15.3"
+tokio = { version = "1", features = ["full"] }
+egui_extras = "0.31.1"
+sysinfo = "0.34.2"
+battery = "0.7.8"
+base64 = "0.22"
+
+[profile.release]
+opt-level = "z"        # Optimize for size
+lto = true             # Link Time Optimization
+codegen-units = 1      # Better optimization
+panic = "abort"        # Smaller binary, disables backtrace
+strip = true           # Automatically strip symbols (nightly only, optional)
+incremental = false    # No incremental compilation metadata
+debug = false          # No debug symbols
