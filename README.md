@@ -14,7 +14,7 @@ EasyBite is a beginner-friendly programming language designed to be accessible t
 - (Versions 0.1.0 and 0.2.0 required .NET Framework; starting with 0.3.0, .NET is no longer required)
 
 **Steps**  
-1. Download the interpreter from [Bin Folder](https://github.com/Dangujba/EasyBite/bin) or the official GitHub page: [github.com/Dangujba/EasyBite](https://github.com/Dangujba/EasyBite).  
+1. Download the interpreter from [Bin Folder](https://github.com/Dangujba/EasyBite/tree/main/bin) or the official GitHub page: [github.com/Dangujba/EasyBite](https://github.com/Dangujba/EasyBite).  
 2. Run the installer for your platform (Windows `.msi`, macOS `.pkg`, or Linux `.tar.gz`).  
 3. (Optional) Add `easybite` to your PATH so you can run it from any shell:  
    ```bash
@@ -30,7 +30,7 @@ EasyBite is a beginner-friendly programming language designed to be accessible t
 
 - **Input / Output**  
   - `input()` to read from the user  
-  - `print()` to display output  
+  - `show()` to display output  
 
 - **Control Structures**  
   - `if` / `else`  
@@ -41,11 +41,11 @@ EasyBite is a beginner-friendly programming language designed to be accessible t
   - New: `is`, `is in`, `is not`, `not in`  
 
 - **Functions**  
-  - Define with `fn`  
+  - Define with `function`  
   - Full recursion support  
 
 - **Method Access on Literals**  
-  ```bite
+  ```ts
   "Hello".count()
   [1,2,3].append(4)
   ```  
