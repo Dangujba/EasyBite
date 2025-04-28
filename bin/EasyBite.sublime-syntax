@@ -1,0 +1,74 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+file_extensions:
+  - bite
+scope: source.bite
+
+contexts:
+  # The prototype context is prepended to all contexts but those setting
+  # meta_include_prototype: false.
+  prototype:
+    - include: comments
+
+  main:
+    # The main context is the initial starting point of our syntax.
+    # Include other contexts from here (or specify them directly).
+    - include: comments
+    - include: strings
+    - include: keywords
+    - include: numbers
+    - include: variables
+
+  keywords:
+    # Keywords are if, else for and while.
+    # Note that blackslashes don't need to be escaped within single quoted
+    # strings in YAML. When using single quoted strings, only single quotes
+    # need to be escaped: this is done by using two single quotes next to each
+    # other.
+    - match: \b(declare|set|to|show|showline|input|generate|stop|iterate|in|over|choose|otherwise | true | false)\b
+      scope: keyword
+    - match: \b(repeat|while|if|then|else|else if|end if|for|end for|from|step|by|end repeat|end function|end iterate|when|end choose)\b
+      scope: keyword.control
+    - match: \b((|)|[|]|{|}|,|<|<=|>|>=|==|!=|'*'|/|remind|^|PLUS|MINUS|SEMICOLON|COLON|AND|OR|NOT)\b
+      scope: keyword.operator
+    - match: \bfunction\b\s+[A-Za-z]+\b
+      scope: entity.name.function
+
+    - match: \b\w+(?=\()
+      scope: entity.name.function.bite
+      push: function-parameters
+    - match: \)
+      scope: punctuation.section.parens.end.bite
+      pop: true
+
+
+  numbers:
+    - match: '\b(-)?[0-9.]+\b'
+      scope: constant.numeric.bite
+
+  strings:
+    # Strings begin and end with quotes, and use backslashes as an escape
+    # character.
+    - match: '"'
+      scope: punctuation.definition.string.begin.bite
+      push: inside_string
+
+  inside_string:
+    - meta_include_prototype: false
+    - meta_scope: string.quoted.double.bite
+    - match: '\.'
+      scope: constant.character.escape.bite
+    - match: '"'
+      scope: punctuation.definition.string.end.bite
+      pop: true
+
+  comments:
+    # Comments begin with a '//' and finish at the end of the line.
+    - match: '//'
+      scope: punctuation.definition.comment.bite
+      push:
+        # This is an anonymous context push for brevity.
+        - meta_scope: comment.line.double-slash.bite
+        - match: $\n?
+          pop: true
