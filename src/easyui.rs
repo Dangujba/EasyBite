@@ -283,7 +283,7 @@ struct DrawyState {
     pen_size: f32, // Thickness of the pen
     pen_color: Color32, // Color of the pen
     fill_color: Color32, // Fill color for closed shapes
-    speed: f32, // Animation speed (not implemented here, but included for completeness)
+    speed: f32,
     path: VecDeque<(Pos2, Pos2, Stroke)>, // Segments drawn: (start, end, stroke)
     fill_path: Vec<Pos2>, // Points for filling (if filling a shape)
     filling: bool, // Whether currently filling a shape
@@ -317,7 +317,7 @@ pub struct FileDialogOptions {
     pub title: Option<String>,
     pub multiselect: bool,
     pub startingpath: Option<String>,
-    pub filters: Option<Vec<(String, Vec<String>)>>, // Changed from filter: Option<String>
+    pub filters: Option<Vec<(String, Vec<String>)>>,
 }
 #[derive(Clone, Copy, PartialEq)]
 pub enum MsgBoxIcon {
@@ -482,7 +482,7 @@ struct PagesState {
     transition_alpha: f32, // Opacity value (0.0 to 1.0) for animation
     in_transition: bool, // Whether a transition is in progress
     transition_start_time: Option<std::time::Instant>, // When the transition started
-    use_transition: bool, // New field to enable/disable transitions
+    use_transition: bool, // field to enable/disable transitions
 }
 
 #[derive(Clone, Debug)]
@@ -637,9 +637,9 @@ pub struct ControlSettings {
     multiline: bool,
     checked: bool,
     group: Option<String>,
-    children: Vec<String>, // New: List of child control IDs
-    border: bool, // New: Toggle border visibility
-    shadow: bool, // New: Toggle shadow for Card
+    children: Vec<String>, // List of child control IDs
+    border: bool, // Toggle border visibility
+    shadow: bool, // Toggle shadow for Card
     use_as_default_panel: bool,
     orientation: String,
     border_style: String,
@@ -692,8 +692,8 @@ struct GridLayoutState {
     spacing: f32, // Space between cells
     cell_controls: Vec<Vec<Option<String>>>,
     show_grid_lines: bool,
-    line_color: Color32, // New field
-    line_thickness: f32, // New field
+    line_color: Color32,
+    line_thickness: f32, 
 }
 
 #[derive(Clone, Debug)]
@@ -753,7 +753,7 @@ impl Default for FlowLayoutState {
 struct DateTimePickerState {
     selected_datetime: DateTime<Local>,
     format: String,
-    is_open: bool, // Add this field
+    is_open: bool, 
 }
 
 impl DateTimePickerState {
@@ -789,7 +789,7 @@ struct MenuItem {
     icon: Option<String>,
     callback: Option<Value>,
     children: Vec<MenuItem>,
-    is_separator: bool, // New field for separators
+    is_separator: bool, // field for separators
 }
 
 #[derive(Clone)]
@@ -1233,7 +1233,7 @@ pub fn createtextbox(args: Vec<Value>) -> Result<Value, String> {
     let settings = ControlSettings {
         control_type: "textbox".to_string(),
         form_id: form_id.clone(),
-        text, // Use provided text
+        text, 
         position: Pos2::new(x, y),
         autosize,
         width,
