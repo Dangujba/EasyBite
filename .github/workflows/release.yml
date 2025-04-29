@@ -4,6 +4,7 @@ on:
     tags:
       - 'v*'
   workflow_dispatch:
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -18,10 +19,6 @@ jobs:
             target: x86_64-pc-windows-msvc
             artifact: easybite.exe
             package: none
-          - os: macos-latest
-            target: x86_64-apple-darwin
-            artifact: EasyBite
-            package: tar.gz
 
     steps:
       - name: 🧾 Checkout source
@@ -37,12 +34,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y pkg-config libssl-dev gcc fontconfig libfontconfig1-dev
-
-      - name: 🛠️ Install Dependencies (macOS)
-        if: matrix.os == 'macos-latest'
-        run: |
-          brew update
-          brew install pkg-config openssl
 
       - name: 🔍 Locate all `Pid` definitions
         run: |
@@ -60,7 +51,7 @@ jobs:
           }
 
       - name: 📦 Build Release Binary (Non-Windows)
-        if: matrix.os != 'windows-latest'
+        if: matrix.os == 'ubuntu-latest'
         run: |
           cargo clean
           cargo build --release --target ${{ matrix.target }} --verbose || exit 1
@@ -81,7 +72,7 @@ jobs:
         run: |
           bin="./target/${{ matrix.target }}/release/${{ matrix.artifact }}"
           if [ -f "$bin" ]; then
-            echo "Running tests on $bin" 
+            echo "Running tests on $bin"
             $bin config
             $bin search --offline
           else
@@ -91,7 +82,7 @@ jobs:
         env:
           EASYBITE_MODULES: ./test-modules
 
-      - name: 📦 Package (Linux/macOS)
+      - name: 📦 Package (Linux)
         if: matrix.package == 'tar.gz'
         run: |
           artefact="easybite-v0.3.0-${{ matrix.target }}.${{ matrix.package }}"
