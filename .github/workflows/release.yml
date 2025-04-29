@@ -28,7 +28,7 @@ jobs:
             target: aarch64-apple-darwin
             artifact: EasyBite
             package: tar.gz
- 
+
     steps:
       - name: 🧾 Checkout source
         uses: actions/checkout@v4
@@ -50,11 +50,23 @@ jobs:
           brew update
           brew install pkg-config openssl
 
-      - name: 📦 Debug Build
+      - name: 📦 Build Release Binary (Linux/macOS)
+        if: matrix.os != 'windows-latest'
         run: |
           cargo clean
           RUSTFLAGS="-D warnings" cargo build --release --target ${{ matrix.target }} --verbose || {
             echo "Build failed, check logs above for details"
+            exit 1
+          }
+
+      - name: 📦 Build Release Binary (Windows)
+        if: matrix.os == 'windows-latest'
+        shell: pwsh
+        run: |
+          $env:RUSTFLAGS="-D warnings"
+          cargo clean
+          cargo build --release --target ${{ matrix.target }} --verbose || {
+            Write-Output "Build failed, check logs above for details"
             exit 1
           }
 
