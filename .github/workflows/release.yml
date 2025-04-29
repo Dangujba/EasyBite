@@ -19,7 +19,7 @@ jobs:
           - os: windows-latest
             target: x86_64-pc-windows-msvc
             artifact: easybite.exe
-            package: zip
+            package: none
           - os: macos-latest
             target: x86_64-apple-darwin
             artifact: EasyBite
@@ -104,34 +104,30 @@ jobs:
             echo "Skipping packaging: binary not found"
           fi
 
-      - name: 📦 Package (Windows)
-        if: matrix.package == 'zip'
-        shell: pwsh
+      - name: Skip Packaging for Windows
+        if: matrix.os == 'windows-latest'
         run: |
-          if (Test-Path "target/${{ matrix.target }}/release/${{ matrix.artifact }}") {
-            Write-Output "Packaging binary..."
-            Compress-Archive -Path target/${{ matrix.target }}/release/${{ matrix.artifact }} -DestinationPath easybite-v0.3.0-${{ matrix.target }}.${{ matrix.package }}
-          } else {
-            Write-Output "Skipping packaging: binary not found"
-          }
+          echo "Skipping packaging step for Windows builds."
 
       - name: 📤 Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: easybite-${{ matrix.target }}
-          path: easybite-v0.3.0-${{ matrix.target }}.${{ matrix.package }}
+          path: |
+            ${{ matrix.package == 'tar.gz' && 'easybite-v0.3.0-${{ matrix.target }}.${{ matrix.package }}' || './target/${{ matrix.target }}/release/${{ matrix.artifact }}' }}
           if-no-files-found: warn
 
       - name: 🚀 Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: easybite-v0.3.0-${{ matrix.target }}.${{ matrix.package }}
+          files: |
+            ${{ matrix.package == 'tar.gz' && 'easybite-v0.3.0-${{ matrix.target }}.${{ matrix.package }}' || './target/${{ matrix.target }}/release/${{ matrix.artifact }}' }}
           body: |
             EasyBite v0.3.0 for ${{ matrix.target }}.
             Install instructions:
             ${{ matrix.os == 'windows-latest' && '```powershell' || '```bash' }}
-            curl -L https://github.com/Dangujba/EasyBite/releases/download/v0.3.0/easybite-v0.3.0-${{ matrix.target }}.${{ matrix.package }} | ${{ matrix.package == 'tar.gz' && 'tar -xz -C /usr/local/bin' || 'Expand-Archive -DestinationPath $env:LOCALAPPDATA\\Programs\\EasyBite' }}
+            ${{ matrix.package == 'tar.gz' && 'curl -L https://github.com/Dangujba/EasyBite/releases/download/v0.3.0/easybite-v0.3.0-${{ matrix.target }}.${{ matrix.package }} | tar -xz -C /usr/local/bin' || '(Copy the binary from the release directory and add it to your PATH)' }}
             ${{ matrix.os == 'windows-latest' && '$env:Path += ";$env:LOCALAPPDATA\\Programs\\EasyBite"' || '' }}
             ${{ matrix.os == 'windows-latest' && '[Environment]::SetEnvironmentVariable("Path", $env:Path, [EnvironmentVariableTarget]::User)' || '' }}
             ${{ matrix.os == 'windows-latest' && '```' || '```' }}
