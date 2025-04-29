@@ -41,9 +41,9 @@ use mac_address::get_mac_address as mac_address;
 #[cfg(unix)]
 use nix::sys::signal::{ kill, Signal };
 #[cfg(unix)]
-use nix::unistd::Pid;
+use nix::unistd::Pid as NixPid;
 
-use sysinfo::Users;
+use sysinfo::{Pid as sysPid, Users};
 // For Windows drive detection:
 #[cfg(windows)]
 use winapi::um::fileapi::{ GetDriveTypeW, GetLogicalDrives };
@@ -930,12 +930,26 @@ pub fn get_system_info(args: Vec<Value>) -> Result<Value, String> {
     // Refresh all processes
     system.refresh_processes(sysinfo::ProcessesToUpdate::All, true);
 
-    // Collect processes as a vector of tuples (Pid, Process)
-    let mut processes: Vec<(Pid, &sysinfo::Process)> = system
+    #[cfg(unix)]
+    let mut processes: Vec<(NixPid, &sysinfo::Process)> = system
         .processes()
         .iter()
-        .map(|(pid, process)| (*pid, process))
+        .map(|(sys_pid, process)| {
+            // Convert sysinfo::Pid to libc::pid_t then to nix::unistd::Pid
+            let raw_pid: libc::pid_t = sys_pid.as_u32() as libc::pid_t;
+            let nix_pid = NixPid::from_raw(raw_pid);
+            (nix_pid, process)
+        })
         .collect();
+    
+    
+    #[cfg(not(unix))]
+    let mut processes: Vec<(SysPid, &sysinfo::Process)> = system
+        .processes()
+        .iter()
+        .map(|(sys_pid, process)| (*sys_pid, process))
+        .collect();
+
 
     // Sort by CPU usage in descending order
     processes.sort_by(|a, b|
