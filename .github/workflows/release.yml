@@ -1,11 +1,9 @@
 name: Build and Release EasyBite
-
 on:
   push:
     tags:
       - 'v*'
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -50,6 +48,14 @@ jobs:
           brew update
           brew reinstall pkgconf openssl || echo "Dependencies reinstalled"
 
+      - name: 🔍 Locate all `Pid` definitions
+        run: |
+          echo "Searching for duplicate Pid definitions..."
+          grep -R "struct Pid" -n src || true
+          grep -R "enum Pid"   -n src || true
+          grep -R "type Pid"   -n src || true
+          grep -R "mod pid"    -n src || true
+
       - name: 📦 Run Cargo Check
         run: |
           # Run cargo check to identify compilation issues without linking
@@ -89,7 +95,7 @@ jobs:
         if: matrix.os == 'windows-latest'
         shell: pwsh
         run: |
-          Write-Output "Listing contents of .\target\${{ matrix.target }}\release\""
+          Write-Output "Listing contents of .\target\${{ matrix.target }}\release\"
           Get-ChildItem -Path ".\target\${{ matrix.target }}\release\" -Force
 
       - name: 🧪 Test Binary (Linux/macOS)
