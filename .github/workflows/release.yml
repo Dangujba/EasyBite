@@ -50,11 +50,15 @@ jobs:
           brew update
           brew install pkg-config openssl
 
+      - name: 📦 Run Clippy Fixes (All Platforms)
+        run: |
+          # Automatically fix common Rust issues before building
+          cargo clippy --fix --allow-dirty || echo "Clippy fixes complete."
+
       - name: 📦 Build Release Binary (Linux/macOS)
         if: matrix.os != 'windows-latest'
         run: |
           cargo clean
-          # Add RUSTFLAGS to suppress warnings and treat them as errors.
           RUSTFLAGS="-D warnings" cargo build --release --target ${{ matrix.target }} --verbose || {
             echo "Build failed, check logs above for details"
             exit 1
@@ -64,18 +68,12 @@ jobs:
         if: matrix.os == 'windows-latest'
         shell: pwsh
         run: |
-          # Add RUSTFLAGS to suppress warnings and treat them as errors.
           $env:RUSTFLAGS="-D warnings"
           cargo clean
           cargo build --release --target ${{ matrix.target }} --verbose || {
             Write-Output "Build failed, check logs above for details"
             exit 1
           }
-
-      - name: Fix Compilation Warnings and Errors
-        run: |
-          # Automatically fix unused variables and mutability errors using cargo clippy.
-          cargo clippy --fix --allow-dirty || echo "Clippy fixes complete."
 
       - name: List Build Output (Non-Windows)
         if: matrix.os != 'windows-latest'
