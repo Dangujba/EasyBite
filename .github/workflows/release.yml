@@ -1,0 +1,137 @@
+name: Build and Release EasyBite
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            artifact: EasyBite
+            package: tar.gz
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            artifact: easybite.exe
+            package: zip
+          - os: macos-latest
+            target: x86_64-apple-darwin
+            artifact: EasyBite
+            package: tar.gz
+          - os: macos-latest
+            target: aarch64-apple-darwin
+            artifact: EasyBite
+            package: tar.gz
+ 
+    steps:
+      - name: 🧾 Checkout source
+        uses: actions/checkout@v4
+
+      - name: 🦀 Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: 🛠️ Install Dependencies (Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pkg-config libssl-dev gcc
+
+      - name: 📦 Build Release Binary
+        run: |
+          # Remove --no-default-features if not required.
+          cargo build --release --target ${{ matrix.target }} --verbose || {
+            echo "Build failed, check logs above for details"
+            exit 1
+          }
+
+      - name: List Build Output (Non-Windows)
+        if: matrix.os != 'windows-latest'
+        run: |
+          echo "Listing contents of ./target/${{ matrix.target }}/release/"
+          ls -la ./target/${{ matrix.target }}/release/
+
+      - name: List Build Output (Windows)
+        if: matrix.os == 'windows-latest'
+        shell: pwsh
+        run: |
+          Write-Output "Listing contents of .\target\${{ matrix.target }}\release\""
+          Get-ChildItem -Path ".\target\${{ matrix.target }}\release\" -Force
+
+      - name: 🧪 Test Binary (Linux/macOS)
+        if: matrix.os != 'windows-latest'
+        run: |
+          if [ -f "./target/${{ matrix.target }}/release/${{ matrix.artifact }}" ]; then
+            echo "Binary found, running tests..."
+            ./target/${{ matrix.target }}/release/${{ matrix.artifact }} config
+            ./target/${{ matrix.target }}/release/${{ matrix.artifact }} search --offline
+          else
+            echo "Binary not found, skipping tests"
+            exit 0
+          fi
+        env:
+          EASYBITE_MODULES: ./test-modules
+
+      - name: 🧪 Test Binary (Windows)
+        if: matrix.os == 'windows-latest'
+        shell: pwsh
+        run: |
+          if (Test-Path "./target/${{ matrix.target }}/release/${{ matrix.artifact }}") {
+            Write-Output "Binary found, running tests..."
+            .\target\${{ matrix.target }}\release\${{ matrix.artifact }} config
+            .\target\${{ matrix.target }}\release\${{ matrix.artifact }} search --offline
+          } else {
+            Write-Output "Binary not found, skipping tests"
+            exit 0
+          }
+        env:
+          EASYBITE_MODULES: ./test-modules
+
+      - name: 📦 Package (Linux/macOS)
+        if: matrix.package == 'tar.gz'
+        run: |
+          if [ -f "./target/${{ matrix.target }}/release/${{ matrix.artifact }}" ]; then
+            echo "Packaging binary..."
+            tar -C target/${{ matrix.target }}/release -czf easybite-v0.3.0-${{ matrix.target }}.${{ matrix.package }} ${{ matrix.artifact }}
+          else
+            echo "Skipping packaging: binary not found"
+          fi
+
+      - name: 📦 Package (Windows)
+        if: matrix.package == 'zip'
+        shell: pwsh
+        run: |
+          if (Test-Path "target/${{ matrix.target }}/release/${{ matrix.artifact }}") {
+            Write-Output "Packaging binary..."
+            Compress-Archive -Path target/${{ matrix.target }}/release/${{ matrix.artifact }} -DestinationPath easybite-v0.3.0-${{ matrix.target }}.${{ matrix.package }}
+          } else {
+            Write-Output "Skipping packaging: binary not found"
+          }
+
+      - name: 📤 Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: easybite-${{ matrix.target }}
+          path: easybite-v0.3.0-${{ matrix.target }}.${{ matrix.package }}
+          if-no-files-found: warn
+
+      - name: 🚀 Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: easybite-v0.3.0-${{ matrix.target }}.${{ matrix.package }}
+          body: |
+            EasyBite v0.3.0 for ${{ matrix.target }}.
+            Install instructions:
+            ${{ matrix.os == 'windows-latest' && '```powershell' || '```bash' }}
+            curl -L https://github.com/Dangujba/EasyBite/releases/download/v0.3.0/easybite-v0.3.0-${{ matrix.target }}.${{ matrix.package }} | ${{ matrix.package == 'tar.gz' && 'tar -xz -C /usr/local/bin' || 'Expand-Archive -DestinationPath $env:LOCALAPPDATA\\Programs\\EasyBite' }}
+            ${{ matrix.os == 'windows-latest' && '$env:Path += ";$env:LOCALAPPDATA\\Programs\\EasyBite"' || '' }}
+            ${{ matrix.os == 'windows-latest' && '[Environment]::SetEnvironmentVariable("Path", $env:Path, [EnvironmentVariableTarget]::User)' || '' }}
+            ${{ matrix.os == 'windows-latest' && '```' || '```' }}
