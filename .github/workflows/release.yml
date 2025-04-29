@@ -44,9 +44,16 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pkg-config libssl-dev gcc fontconfig libfontconfig1-dev
 
-      - name: 📦 Build Release Binary
+      - name: 🛠️ Install Dependencies (macOS)
+        if: matrix.os == 'macos-latest'
         run: |
-          cargo build --release --target ${{ matrix.target }} --verbose || {
+          brew update
+          brew install pkg-config openssl
+
+      - name: 📦 Debug Build
+        run: |
+          cargo clean
+          RUSTFLAGS="-D warnings" cargo build --release --target ${{ matrix.target }} --verbose || {
             echo "Build failed, check logs above for details"
             exit 1
           }
