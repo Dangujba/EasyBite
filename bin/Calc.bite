@@ -1,10 +1,25 @@
+// Hi @Dangujba,
+
+// I’ve been exploring the EasyBite project and came across the Calc.bite file, 
+// While using the calculator, I thought of some enhancements that could make it even more robust and versatile for users. These include:
+
+ //   > Modulus (%): Adding modulus functionality for operations like finding the remainder of a division.
+  //  > Exponentiation (^): Enabling users to compute powers of numbers directly.
+    // > Square Root (√): Allowing quick square root calculations.
+  //  > Parentheses (( and )): Letting users group expressions for precedence, enabling more complex calculations.
+// also, let's work on multiline comments
+// Looking forward to your thoughts.
+
+// Best regards,
+// Shakefire
+ // Proposed Calc.bite
+
 import "Misc"
 import "gui"
 import "String"
 import "Math"
 
 // Create the form for the calculator
-
 declare calcForm
 set calcForm to createform("Scientific Calculator", 220, 300)
 setbackcolor(calcForm, "#ffffff")
@@ -16,103 +31,61 @@ setbackcolor(calcForm, textBox, "#555555")
 setdock(calcForm, textBox, "Top")
 
 // Function to append text to the text box
-function onclickbtn0()
-    settext(calcForm, textBox, gettext(calcForm, textBox) + tostring(0))
-end function
-function onclickbtn1()
-    settext(calcForm, textBox, gettext(calcForm, textBox) + tostring(1))
-end function
-function onclickbtn2()
-    settext(calcForm, textBox, gettext(calcForm, textBox) + tostring(2))
-end function
-function onclickbtn3()
-    settext(calcForm, textBox, gettext(calcForm, textBox) + tostring(3))
-end function
-function onclickbtn4()
-    settext(calcForm, textBox, gettext(calcForm, textBox) + tostring(4))
-end function
-function onclickbtn5()
-    settext(calcForm, textBox, gettext(calcForm, textBox) + tostring(5))
-end function
-function onclickbtn6()
-    settext(calcForm, textBox, gettext(calcForm, textBox) + tostring(6))
-end function
-function onclickbtn7()
-    settext(calcForm, textBox, gettext(calcForm, textBox) + tostring(7))
-end function
-function onclickbtn8()
-    settext(calcForm, textBox, gettext(calcForm, textBox) + tostring(8))
-end function
-function onclickbtn9()
-    settext(calcForm, textBox, gettext(calcForm, textBox) + tostring(9))
-end function
-
-// Function to evaluate a mathematical expression
-function evaluateExpression(expression)
-    return eval(expression)
-end function
-
-// Function to calculate the expression in the text box
-function onclickcal()
-    set expression to gettext(calcForm, textBox)
-    set result to evaluateExpression(expression)
-    settext(calcForm, textBox, result)
-end function
-
 function appendText(text)
     settext(calcForm, textBox, gettext(calcForm, textBox) + text)
 end function
 
-function onclickdot()
-    appendText(".")
+// Digit Buttons
+function onclickbtn0() appendText("0") end function
+function onclickbtn1() appendText("1") end function
+function onclickbtn2() appendText("2") end function
+function onclickbtn3() appendText("3") end function
+function onclickbtn4() appendText("4") end function
+function onclickbtn5() appendText("5") end function
+function onclickbtn6() appendText("6") end function
+function onclickbtn7() appendText("7") end function
+function onclickbtn8() appendText("8") end function
+function onclickbtn9() appendText("9") end function
+
+// Mathematical Operators
+function onclickPlus() appendText("+") end function
+function onclickMinus() appendText("-") end function
+function onclickMultiply() appendText("*") end function
+function onclickDivide() appendText("/") end function
+function onclickModulus() appendText("%") end function
+function onclickExponent() appendText("^") end function
+
+// Parentheses
+function onclickOpenParenthesis() appendText("(") end function
+function onclickCloseParenthesis() appendText(")") end function
+
+// Special Functions
+function onclickSqrt() appendText("sqrt(") end function
+function onclickdot() appendText(".") end function
+function onclickSin() appendText("sin(") end function
+function onclickCos() appendText("cos(") end function
+function onclickTan() appendText("tan(") end function
+function onclickExp() appendText("exp(") end function
+
+// Evaluate Mathematical Expression
+function evaluateExpression(expression)
+    return eval(expression)
 end function
 
 function onclickEquals()
-    
     if(gettext(calcForm, textBox) != "") then
-        onclickcal()
+        set expression to gettext(calcForm, textBox)
+        set result to evaluateExpression(expression)
+        settext(calcForm, textBox, result)
     else
         return null
     end if        
-
 end function
 
-function onclickPlus()
-    appendText("+")
-end function
+// Layout for Calculator Buttons
 
-function onclickMinus()
-    appendText("-")
-end function
-
-function onclickMultiply()
-    appendText("*")
-end function
-
-function onclickDivide()
-    appendText("/")
-end function
-
-function onclickSin()
-    appendText("sin(")
-end function
-
-function onclickCos()
-    appendText("cos(")
-end function
-
-function onclickTan()
-    appendText("tan(")
-end function
-
-function onclickExp()
-    appendText("exp")
-end function
-
-
-// Create number buttons for first row
-
-set btnsin to button(calcForm, "sin", "onclickSin" )
+// First Row
+set btnsin to button(calcForm, "sin", "onclickSin")
 setbackcolor(calcForm, btnsin, "#28a745")
 setforecolor(calcForm, btnsin, "White")
 setstyle(calcForm, btnsin, "Segou UI", 13, "bold")
@@ -120,165 +93,82 @@ setwidth(calcForm, btnsin, 40)
 setheight(calcForm, btnsin, 40)
 setlocation(calcForm, btnsin, 10, 35)
 
-set btncos to button(calcForm, "cos", "onclickCos" )
-setbackcolor(calcForm, btncos, "#28a745")
-setforecolor(calcForm, btncos, "White")
-setstyle(calcForm, btncos, "Segou UI", 13, "bold")
-setwidth(calcForm, btncos, 40)
-setheight(calcForm, btncos, 40)
+set btncos to button(calcForm, "cos", "onclickCos")
 setright(calcForm, btnsin, btncos, 5)
 
-set btntan to button(calcForm, "tan", "onclickTan" )
-setbackcolor(calcForm, btntan, "#28a745")
-setforecolor(calcForm, btntan, "White")
-setstyle(calcForm, btntan, "Segou UI", 13, "bold")
-setwidth(calcForm, btntan, 40)
-setheight(calcForm, btntan, 40)
+set btntan to button(calcForm, "tan", "onclickTan")
 setright(calcForm, btncos, btntan, 5)
 
-set btndivide to button(calcForm, "/", "onclickDivide" )
-setbackcolor(calcForm, btndivide, "#28a745")
-setforecolor(calcForm, btndivide, "White")
-setstyle(calcForm, btndivide, "Segou UI", 13, "bold")
-setwidth(calcForm, btndivide, 40)
-setheight(calcForm, btndivide, 40)
+set btndivide to button(calcForm, "/", "onclickDivide")
 setright(calcForm, btntan, btndivide, 5)
 
 // Second Row
-
-set btn7 to button(calcForm, "7", "onclickbtn7" )
-setbackcolor(calcForm, btn7, "#28a745")
-setforecolor(calcForm, btn7, "White")
-setstyle(calcForm, btn7, "Segou UI", 13, "bold")
-setwidth(calcForm, btn7, 40)
-setheight(calcForm, btn7, 40)
+set btn7 to button(calcForm, "7", "onclickbtn7")
 setbelow(calcForm, btnsin, btn7, 5)
 
-set btn8 to button(calcForm, "8", "onclickbtn8" )
-setbackcolor(calcForm, btn8, "#28a745")
-setforecolor(calcForm, btn8, "White")
-setstyle(calcForm, btn8, "Segou UI", 13, "bold")
-setwidth(calcForm, btn8, 40)
-setheight(calcForm, btn8, 40)
+set btn8 to button(calcForm, "8", "onclickbtn8")
 setright(calcForm, btn7, btn8, 5)
 
-set btn9 to button(calcForm, "9", "onclickbtn9" )
-setbackcolor(calcForm, btn9, "#28a745")
-setforecolor(calcForm, btn9, "White")
-setstyle(calcForm, btn9, "Segou UI", 13, "bold")
-setwidth(calcForm, btn9, 40)
-setheight(calcForm, btn9, 40)
+set btn9 to button(calcForm, "9", "onclickbtn9")
 setright(calcForm, btn8, btn9, 5)
 
-set btnplus to button(calcForm, "+", "onclickPlus" )
-setbackcolor(calcForm, btnplus, "#28a745")
-setforecolor(calcForm, btnplus, "White")
-setstyle(calcForm, btnplus, "Segou UI", 13, "bold")
-setwidth(calcForm, btnplus, 40)
-setheight(calcForm, btnplus, 40)
+set btnplus to button(calcForm, "+", "onclickPlus")
 setright(calcForm, btn9, btnplus, 5)
 
 // Third Row
-
-set btn4 to button(calcForm, "4", "onclickbtn4" )
-setbackcolor(calcForm, btn4, "#28a745")
-setforecolor(calcForm, btn4, "White")
-setstyle(calcForm, btn4, "Segou UI", 13, "bold")
-setwidth(calcForm, btn4, 40)
-setheight(calcForm, btn4, 40)
+set btn4 to button(calcForm, "4", "onclickbtn4")
 setbelow(calcForm, btn7, btn4, 5)
 
-set btn5 to button(calcForm, "5", "onclickbtn5" )
-setbackcolor(calcForm, btn5, "#28a745")
-setforecolor(calcForm, btn5, "White")
-setstyle(calcForm, btn5, "Segou UI", 13, "bold")
-setwidth(calcForm, btn5, 40)
-setheight(calcForm, btn5, 40)
+set btn5 to button(calcForm, "5", "onclickbtn5")
 setright(calcForm, btn4, btn5, 5)
 
-set btn6 to button(calcForm, "6", "onclickbtn6" )
-setbackcolor(calcForm, btn6, "#28a745")
-setforecolor(calcForm, btn6, "White")
-setstyle(calcForm, btn6, "Segou UI", 13, "bold")
-setwidth(calcForm, btn6, 40)
-setheight(calcForm, btn6, 40)
+set btn6 to button(calcForm, "6", "onclickbtn6")
 setright(calcForm, btn5, btn6, 5)
 
-set btnminus to button(calcForm, "-", "onclickMinus" )
-setbackcolor(calcForm, btnminus, "#28a745")
-setforecolor(calcForm, btnminus, "White")
-setstyle(calcForm, btnminus, "Segou UI", 13, "bold")
-setwidth(calcForm, btnminus, 40)
-setheight(calcForm, btnminus, 40)
+set btnminus to button(calcForm, "-", "onclickMinus")
 setright(calcForm, btn6, btnminus, 5)
 
 // Fourth Row
-
-set btn1 to button(calcForm, "1", "onclickbtn1" )
-setbackcolor(calcForm, btn1, "#28a745")
-setforecolor(calcForm, btn1, "White")
-setstyle(calcForm, btn1, "Segou UI", 13, "bold")
-setwidth(calcForm, btn1, 40)
-setheight(calcForm, btn1, 40)
+set btn1 to button(calcForm, "1", "onclickbtn1")
 setbelow(calcForm, btn4, btn1, 5)
 
-set btn2 to button(calcForm, "2", "onclickbtn2" )
-setbackcolor(calcForm, btn2, "#28a745")
-setforecolor(calcForm, btn2, "White")
-setstyle(calcForm, btn2, "Segou UI", 13, "bold")
-setwidth(calcForm, btn2, 40)
-setheight(calcForm, btn2, 40)
+set btn2 to button(calcForm, "2", "onclickbtn2")
 setright(calcForm, btn1, btn2, 5)
 
-set btn3 to button(calcForm, "3", "onclickbtn3" )
-setbackcolor(calcForm, btn3, "#28a745")
-setforecolor(calcForm, btn3, "White")
-setstyle(calcForm, btn3, "Segou UI", 13, "bold")
-setwidth(calcForm, btn3, 40)
-setheight(calcForm, btn3, 40)
+set btn3 to button(calcForm, "3", "onclickbtn3")
 setright(calcForm, btn2, btn3, 5)
 
-set btnmult to button(calcForm, "*", "onclickMultiply" )
-setbackcolor(calcForm, btnmult, "#28a745")
-setforecolor(calcForm, btnmult, "White")
-setstyle(calcForm, btnmult, "Segou UI", 13, "bold")
-setwidth(calcForm, btnmult, 40)
-setheight(calcForm, btnmult, 40)
+set btnmult to button(calcForm, "*", "onclickMultiply")
 setright(calcForm, btn3, btnmult, 5)
 
 // Fifth Row
-
-set btn0 to button(calcForm, "0", "onclickbtn0" )
-setbackcolor(calcForm, btn0, "#28a745")
-setforecolor(calcForm, btn0, "White")
-setstyle(calcForm, btn0, "Segou UI", 13, "bold")
-setwidth(calcForm, btn0, 40)
-setheight(calcForm, btn0, 40)
+set btn0 to button(calcForm, "0", "onclickbtn0")
 setbelow(calcForm, btn1, btn0, 5)
 
-set btndot to button(calcForm, ".", "onclickdot" )
-setbackcolor(calcForm, btndot, "#28a745")
-setforecolor(calcForm, btndot, "White")
-setstyle(calcForm, btndot, "Segou UI", 13, "bold")
-setwidth(calcForm, btndot, 40)
-setheight(calcForm, btndot, 40)
+set btndot to button(calcForm, ".", "onclickdot")
 setright(calcForm, btn0, btndot, 5)
 
-set btnexp to button(calcForm, "exp", "onclickExp" )
-setbackcolor(calcForm, btnexp, "#28a745")
-setforecolor(calcForm, btnexp, "White")
-setstyle(calcForm, btnexp, "Segou UI", 10, "bold")
-setwidth(calcForm, btnexp, 40)
-setheight(calcForm, btnexp, 40)
+set btnexp to button(calcForm, "exp", "onclickExp")
 setright(calcForm, btndot, btnexp, 5)
 
-set btnequal to button(calcForm, "=", "onclickEquals" )
-setbackcolor(calcForm, btnequal, "#28a745")
-setforecolor(calcForm, btnequal, "White")
-setstyle(calcForm, btnequal, "Segou UI", 13, "bold")
-setwidth(calcForm, btnequal, 40)
-setheight(calcForm, btnequal, 40)
+set btnequal to button(calcForm, "=", "onclickEquals")
 setright(calcForm, btnexp, btnequal, 5)
+
+// Sixth Row (Additional Buttons)
+set btnMod to button(calcForm, "%", "onclickModulus")
+setbelow(calcForm, btn0, btnMod, 5)
+
+set btnExp to button(calcForm, "^", "onclickExponent")
+setright(calcForm, btnMod, btnExp, 5)
+
+set btnSqrt to button(calcForm, "√", "onclickSqrt")
+setright(calcForm, btnExp, btnSqrt, 5)
+
+set btnOpenParen to button(calcForm, "(", "onclickOpenParenthesis")
+setbelow(calcForm, btnMod, btnOpenParen, 5)
+
+set btnCloseParen to button(calcForm, ")", "onclickCloseParenthesis")
+setright(calcForm, btnOpenParen, btnCloseParen, 5)
 
 // Show the form
 runapp(calcForm)
